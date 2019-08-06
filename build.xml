@@ -1,0 +1,34 @@
+<project name="JadeDev" default="00_RMA" basedir=".">
+    <property name="src" value="./src"/>
+    <property name="classes" value="./bin"/>
+    <property name="jade_lib" value="/home/ammar/Programs/jade/lib/"/><!-- Path for jade.jar -->
+    <path id="project.class.path">
+        <pathelement location="${classes}"/>
+        <fileset dir="${jade_lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+    <target name="00_RMA"><!-- launch main container -->
+        <java classname="jade.Boot" classpathref="project.class.path" fork="true">
+            <arg value="-gui"/>
+        </java>
+    </target>	
+	<target name="ENV"><!-- create Env Agent -->
+        <java classname="jade.Boot" classpathref="project.class.path" fork="true">
+            <arg value="-container"/>
+            <arg value="ENV:flock.Environment()"/>
+        </java>
+    </target>
+	<target name="one-particles"><!-- create particels Agents -->
+        <java classname="jade.Boot" classpathref="project.class.path" fork="true">
+            <arg value="-container"/>
+            <arg value="p1:flock.PSOAgent"/>
+        </java>
+    </target>
+	<target name="ten-particles"><!-- create particels Agents -->
+        <java classname="jade.Boot" classpathref="project.class.path" fork="true">
+            <arg value="-container"/>
+            <arg value="p1:flock.PSOAgent;p2:flock.PSOAgent;p3:flock.PSOAgent;p4:flock.PSOAgent;p5:flock.PSOAgent;p6:flock.PSOAgent;p7:flock.PSOAgent;p8:flock.PSOAgent;p9:flock.PSOAgent;p10:flock.PSOAgent"/>
+        </java>
+    </target>
+</project>
